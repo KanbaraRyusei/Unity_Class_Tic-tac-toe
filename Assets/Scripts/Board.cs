@@ -30,7 +30,7 @@ public class Board : MonoBehaviour
                 _pieces[i, j] = new Piece(i, j);
                 var b = Instantiate(_buttonPrefab);
                 var p = b.GetComponent<PieceButton>();
-                p.Init(_pieces[i, j], this);
+                p.Init(_pieces[i, j]);
             }
         }
     }

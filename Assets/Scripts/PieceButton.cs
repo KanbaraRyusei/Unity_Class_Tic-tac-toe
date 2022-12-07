@@ -9,21 +9,21 @@ public class PieceButton : MonoBehaviour
     public bool IsCircle => _isCircle;
 
     private Piece _piece;
-    private Board _board;
     private Button _button;
     private bool _isClick = false;
     private bool _isCircle = false;
 
-    public void Init(Piece piece, Board board)
+    public void Init(Piece piece)
     {
         _piece = piece;
-        _board = board;
         _button = gameObject.GetComponent<Button>();
         _button.onClick.AddListener(OnClick);
+        Debug.Log("Init");
     }
 
     private void OnClick()
     {
+        _piece.PutPiece(true);
         _isClick = true;
         _isCircle = true;
         _button.GetComponent<Image>().color = Color.blue;

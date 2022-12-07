@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91e91cdfbda3b0f42887e919b6f41b3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _board: {fileID: 0}
+  _board: {fileID: 2108497482}
 --- !u!114 &436795621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9b52a000c43b8d4fba23f37306a449a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _board: {fileID: 0}
+  _board: {fileID: 2108497482}
 --- !u!4 &436795622
 Transform:
   m_ObjectHideFlags: 0
@@ -555,4 +555,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 0
   _height: 0
-  _buttonPrefab: {fileID: 0}
+  _buttonPrefab: {fileID: 755375177001884841, guid: e61fd7c1968af464aac3da3d083197a3, type: 3}
