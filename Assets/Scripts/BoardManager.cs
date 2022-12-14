@@ -55,14 +55,14 @@ public class BoardManager : SingletonMonoBehaviour<BoardManager>
             }
         }
 
-        for (int i = 0; i < _board.Height; i++)
+        for (int i = 0; i < _board.Height; i++)// 左上から右下に向かう斜めの配列
         {
             index[i] = _board.Pieces[i, i];
         }
 
         DiagonalCheck(index, isPlayer);
 
-        for (int i = _board.Height - 1; i >= 0; i--)
+        for (int i = _board.Height - 1; i >= 0; i--)// 右上から左下に向かう斜めの配列
         {
             index[i] = _board.Pieces[i, i];
         }
