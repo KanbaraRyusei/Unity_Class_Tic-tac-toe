@@ -3,26 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class BoardEvaluationManager : MonoBehaviour
+public class BoardEvaluationManager : SingletonMonoBehaviour<BoardEvaluationManager>
 {
-    [SerializeField]
-    private Board _board;
+    protected override void Awake()
+    {
+        base.Awake();
+    }
 
     public int CountPieceLine(bool isPlayer)
     {
         int count = 0;
         bool isOnlySamePiece = true;
-        Piece[] index = new Piece[_board.Height];
+        Piece[] index = new Piece[BoardManager.Instance.BoardInstance.Height];
 
-        for(int i = 0; i < _board.Height; i++)// ‰¡
+        for(int i = 0; i < BoardManager.Instance.BoardInstance.Height; i++)// ‰¡
         {
-            for(int j = 0; j < _board.Width; j++)
+            for(int j = 0; j < BoardManager.Instance.BoardInstance.Width; j++)
             {
-                if(_board.Pieces[i, j].OnPutPiece)
+                if(BoardManager.Instance.BoardInstance.Pieces[i, j].OnPutPiece)
                 {
-                    if(_board.Pieces[i, j].IsCircle != isPlayer)
+                    if(BoardManager.Instance.BoardInstance.Pieces[i, j].IsCircle != isPlayer)
                     {
                         isOnlySamePiece = false;
+                        break;
                     }
                 }
             }
@@ -34,15 +37,16 @@ public class BoardEvaluationManager : MonoBehaviour
         }
 
         isOnlySamePiece = true;
-        for (int i = 0; i < _board.Width; i++)// c
+        for (int i = 0; i < BoardManager.Instance.BoardInstance.Width; i++)// c
         {
-            for (int j = 0; j < _board.Height; j++)
+            for (int j = 0; j < BoardManager.Instance.BoardInstance.Height; j++)
             {
-                if (_board.Pieces[i, j].OnPutPiece)
+                if (BoardManager.Instance.BoardInstance.Pieces[i, j].OnPutPiece)
                 {
-                    if (_board.Pieces[i, j].IsCircle != isPlayer)
+                    if (BoardManager.Instance.BoardInstance.Pieces[i, j].IsCircle != isPlayer)
                     {
                         isOnlySamePiece = false;
+                        break;
                     }
                 }
             }
@@ -53,9 +57,10 @@ public class BoardEvaluationManager : MonoBehaviour
             }
         }
 
-        for(int i = 0; i < _board.Height; i++)
+        // ŽÎ‚ß
+        for(int i = 0; i < BoardManager.Instance.BoardInstance.Height; i++)
         {
-            index[i] = _board.Pieces[i, i];
+            index[i] = BoardManager.Instance.BoardInstance.Pieces[i, i];// ¶ã‚©‚ç‰E‰º‚ÉŒü‚©‚¤ŽÎ‚ß‚Ì”z—ñ
         }
 
         if (index.Where(x => x.OnPutPiece).Count() == index.Where(x => x.OnPutPiece).Where(x => x.IsCircle == isPlayer).Count())
@@ -63,9 +68,9 @@ public class BoardEvaluationManager : MonoBehaviour
             count++;
         }
 
-        for(int i = _board.Height; i > 0; i--)
+        for(int i = BoardManager.Instance.BoardInstance.Height - 1; i >= 0; i--)
         {
-            index[i] = _board.Pieces[i, i];
+            index[i] = BoardManager.Instance.BoardInstance.Pieces[i, i];// ‰Eã‚©‚ç¶‰º‚ÉŒü‚©‚¤ŽÎ‚ß‚Ì”z—ñ
         }
 
         if(index.Where(x => x.OnPutPiece).Count() == index.Where(x => x.OnPutPiece).Where(x => x.IsCircle == isPlayer).Count())

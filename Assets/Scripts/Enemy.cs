@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private void Update()
+    public void PlayTurn()
     {
-        if(!TurnManager.IsPlayerTurn)
-        {
-            PlayTurn();
-        }
-    }
+        int num = BoardEvaluationManager.Instance.CountPieceLine(false)
+            - BoardEvaluationManager.Instance.CountPieceLine(true);
 
-    private void PlayTurn()
-    {
+        BoardManager.Instance.BoardInstance.PieceButtons[0].OnClick(false);
 
+        TurnManager.Instance.NextTurn();
     }
 }

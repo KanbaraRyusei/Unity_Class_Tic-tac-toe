@@ -17,16 +17,29 @@ public class PieceButton : MonoBehaviour
     {
         _piece = piece;
         _button = gameObject.GetComponent<Button>();
-        _button.onClick.AddListener(OnClick);
-        Debug.Log("Init");
+        ButtonInit();
     }
 
-    private void OnClick()
+    public void ButtonInit()
     {
-        _piece.PutPiece(true);
+        _button.onClick.AddListener(() => OnClick(TurnManager.Instance.IsPlayerTurn));
+    }
+
+    public void OnClick(bool isPlayer)
+    {
+        if (_isClick) return;
+        _piece.PutPiece(isPlayer);
         _isClick = true;
-        _isCircle = true;
-        _button.GetComponent<Image>().color = Color.blue;
-        TurnManager.NextTurn();
+        _isCircle = isPlayer;
+        if (isPlayer)
+        {
+            _button.GetComponent<Image>().color = Color.blue;
+        }
+        else
+        {
+            _button.GetComponent<Image>().color = Color.red;
+        }
+        TurnManager.Instance.NextTurn();
+        ButtonInit();
     }
 }

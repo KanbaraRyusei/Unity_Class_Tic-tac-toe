@@ -2,15 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class TurnManager
+public class TurnManager : SingletonMonoBehaviour<TurnManager>
 {
-    public static bool IsPlayerTurn => _isPlayerTurn;
+    public bool IsPlayerTurn => _isPlayerTurn;
 
-    private static bool _isPlayerTurn = true;
+    private bool _isPlayerTurn = true;
 
-    public static void NextTurn()
+    [SerializeField]
+    private Enemy _enemy;
+
+    protected override void Awake()
     {
+        base.Awake();
+    }
+
+    public void NextTurn()
+    {
+        Debug.Log("NextTurn");
+        if(BoardManager.Instance.CompleteCheck(_isPlayerTurn))
+        {
+            Debug.Log("Win");
+            return;
+        }
 
         _isPlayerTurn = !_isPlayerTurn;
+
+        if(!_isPlayerTurn)
+        {
+            _enemy.PlayTurn();
+        }
     }
 }

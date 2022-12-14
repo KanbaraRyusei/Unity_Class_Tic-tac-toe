@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 436795622}
   - component: {fileID: 436795621}
   - component: {fileID: 436795620}
+  - component: {fileID: 436795623}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -166,7 +167,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9b52a000c43b8d4fba23f37306a449a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _board: {fileID: 2108497482}
 --- !u!4 &436795622
 Transform:
   m_ObjectHideFlags: 0
@@ -182,6 +182,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &436795623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436795619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea0f333759b888444ba04c757c13e03c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemy: {fileID: 855215469}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,6 +566,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27fbd4f8db656c4e80bc237b82bb8af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _width: 0
-  _height: 0
+  _width: 3
+  _height: 3
   _buttonPrefab: {fileID: 755375177001884841, guid: e61fd7c1968af464aac3da3d083197a3, type: 3}

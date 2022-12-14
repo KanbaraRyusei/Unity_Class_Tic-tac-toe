@@ -3,10 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class BoardManager : MonoBehaviour
+public class BoardManager : SingletonMonoBehaviour<BoardManager>
 {
+    public Board BoardInstance => _board;
+
     [SerializeField]
     private Board _board;
+
+    protected override void Awake()
+    {
+        base.Awake();
+    }
 
     public bool CompleteCheck(bool isPlayer)
     {
@@ -17,14 +24,10 @@ public class BoardManager : MonoBehaviour
         {
             for (int j = 0; j < _board.Width; j++)
             {
-                if (!_board.Pieces[i, j].OnPutPiece)
-                {
-                    break;
-                }
-
-                if(_board.Pieces[i, j].IsCircle != isPlayer)
+                if (!_board.Pieces[i, j].OnPutPiece || _board.Pieces[i, j].IsCircle != isPlayer)
                 {
                     isOnlySamePiece = false;
+                    break;
                 }
             }
 
@@ -39,14 +42,10 @@ public class BoardManager : MonoBehaviour
         {
             for (int j = 0; j < _board.Height; j++)
             {
-                if (!_board.Pieces[i, j].OnPutPiece)
-                {
-                    break;
-                }
-
-                if (_board.Pieces[i, j].IsCircle != isPlayer)
+                if (!_board.Pieces[i, j].OnPutPiece || _board.Pieces[i, j].IsCircle != isPlayer)
                 {
                     isOnlySamePiece = false;
+                    break;
                 }
             }
 
@@ -56,7 +55,6 @@ public class BoardManager : MonoBehaviour
             }
         }
 
-        isOnlySamePiece = true;
         for (int i = 0; i < _board.Height; i++)
         {
             index[i] = _board.Pieces[i, i];
@@ -64,8 +62,7 @@ public class BoardManager : MonoBehaviour
 
         DiagonalCheck(index, isPlayer);
 
-        isOnlySamePiece = true;
-        for (int i = _board.Height; i > 0; i--)
+        for (int i = _board.Height - 1; i >= 0; i--)
         {
             index[i] = _board.Pieces[i, i];
         }
@@ -85,6 +82,7 @@ public class BoardManager : MonoBehaviour
                 if (index[i].IsCircle != isPlayer)
                 {
                     isOnlySamePiece = false;
+                    break;
                 }
             }
 
